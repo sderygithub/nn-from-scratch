@@ -1,13 +1,13 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+from module import Module
 
 import numpy as np
 
 
 def softmax(x):
     """Compute softmax values for each sets of scores in x."""
-    e_x = np.exp(x - np.max(x))
-    return e_x / e_x.sum()
+    # https://stackoverflow.com/questions/32030343/subtracting-the-mean-of-each-row-in-numpy-with-broadcasting
+    e_x = np.exp(x - np.max(x, axis=1, keepdims=True))
+    return e_x / e_x.sum(axis=1, keepdims=True)
 
 
 def sigmoid(x):
@@ -15,17 +15,18 @@ def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
 
-class Threshold:
+class Threshold(Module):
 
     def __init__(self, threshold, value):
         """ Thresholds each element of the input Tensor
 
-        Threshold is defined as::
+        Threshold is defined as:
 
          y =  x        if x >  threshold
               value    if x <= threshold
 
         """
+        super().__init__()
         self.threshold = threshold
         self.value = value
 
@@ -36,10 +37,10 @@ class Threshold:
 class ReLU(Threshold):
 
     def __init__(self):
-        super(ReLU, self).__init__(0, 0)
+        super().__init__(0, 0)
 
 
-class Sigmoid():
+class Sigmoid(Module):
     """Applies the element-wise function,
     :math:`f(x) = 1 / ( 1 + exp(-x))`
     """
@@ -51,7 +52,7 @@ class Sigmoid():
         return self.__class__.__name__ + ' ()'
 
 
-class Tanh():
+class Tanh(Module):
     """Applies element-wise,
     :math:`f(x) = (exp(x) - exp(-x)) / (exp(x) + exp(-x))`
     """
@@ -63,7 +64,7 @@ class Tanh():
         return self.__class__.__name__ + ' ()'
 
 
-class Softmax():
+class Softmax(Module):
     """Applies the Softmax function to an n-dimensional input Tensor
     rescaling them so that the elements of the n-dimensional output Tensor
     lie in the range (0,1) and sum to 1
