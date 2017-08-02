@@ -6,6 +6,7 @@ def sigmoid(x, deriv=False):
         return x * (1 - x)
     return 1 / (1 + np.exp(-x))
 
+# Input data
 X = np.array([
     [0, 0, 1],
     [0, 1, 1],
@@ -13,14 +14,17 @@ X = np.array([
     [1, 1, 1]
 ])
 
+# Target
 y = np.array([[0, 0, 1, 1]]).T
 
+# Set random seed
 np.random.seed(1)
 
+# Initialize hidden layer with random weights
 syn0 = 2 * np.random.random((3, 1)) - 1
 
 print("Input:\n{}".format(X))
-print("Output:\n{}".format(y))
+print("Target:\n{}".format(y))
 
 # Input data
 l0 = X
@@ -28,7 +32,7 @@ l0 = X
 for i, j in enumerate(range(60000)):
 
     # Feed-forward
-    l1 = np.dot(l0, syn0)
+    l1 = l0.dot(syn0)
 
     # Transform into [0, 1] probabilistic decision
     l1 = sigmoid(l1)
@@ -40,9 +44,9 @@ for i, j in enumerate(range(60000)):
     loss = l1_error * sigmoid(l1, deriv=True)
 
     # Update weights
-    syn0 += np.dot(l0.T, loss)
+    syn0 += l0.T.dot(loss)
 
     if i % 10000 == 0:
         print("Training iteration {} - loss {}".format(i, sum(loss)))
 
-print(l1)
+print("Output:\n{}".format(l1))
