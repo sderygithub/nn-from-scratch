@@ -6,20 +6,23 @@ Neural Networks From Scratch
 pip install -r requirements.txt
 
 
-# Level 01 - Basics
+# Level
 
-# Level 02 - Adding Layers
+## 01 - Basics
+https://github.com/sderygithub/nn-from-scratch/tree/master/level_01
 
-# Level 03 - GRU
+## 02 - Adding Layers
+
+## 03 - GRU
 TODO
 
-# Level 04 - GRU
+## 04 - GRU
 TODO
 
-# Level 05 - LSTM
+## 05 - LSTM
 TODO
 
 # [...] - Suggestions?
 
-# Level 10 - Modularizing into a Framework
+## 10 - Modularizing into a Framework
 Partial
