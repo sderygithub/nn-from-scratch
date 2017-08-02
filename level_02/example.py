@@ -32,11 +32,11 @@ l0 = X
 
 for i, j in enumerate(range(60000)):
 
-    # Feed-forward
+    # Feed-forward through two layers network
     l1 = sigmoid(np.dot(l0, syn0))
     l2 = sigmoid(np.dot(l1, syn1))
 
-    # Compute error
+    # Compute output error
     l2_error = y - l2
 
     # Compute gradient as the sigmoid slope
